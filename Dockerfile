@@ -162,10 +162,10 @@ RUN set -ex; \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 ENV TZ=Asia/Shanghai
-RUN wget https://github.com/nicholastz/shadowsocksr/archive/master.zip && unzip master && mv shadowsocksr-master shadowsocksr
-RUN rm -rf master.zip
-RUN cd /shadowsocksr
-RUN sh /shadowsocksr/setup_cymysql2.sh
-RUN pip install peewee
-RUN pip install pymysql
+RUN wget https://github.com/nicholastz/shadowsocksr/archive/master.zip && unzip master && mv shadowsocksr-master shadowsocksr \
+          && rm -rf master.zip \
+	  && cd /shadowsocksr/ \
+	  && sh /shadowsocksr/setup_cymysql2.sh \
+	  && pip install peewee \
+	  && pip install pymysql
 CMD ["sh" "/shadowsocksr/logrun.sh"]
