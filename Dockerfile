@@ -28,6 +28,7 @@ RUN set -ex \
 		tar \
 		vim \
 		git \
+		tzdata \
 		xz \
 	\
 	&& wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" \
@@ -161,11 +162,11 @@ RUN set -ex; \
 			\( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
-ENV TZ=Asia/Shanghai
 RUN wget https://github.com/nicholastz/shadowsocksr/archive/master.zip && unzip master && mv shadowsocksr-master shadowsocksr \
           && rm -rf master.zip \
 	  && cd /shadowsocksr/ \
 	  && sh /shadowsocksr/setup_cymysql2.sh \
 	  && pip install peewee \
-	  && pip install pymysql
+	  && pip install pymysql \
+	  && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 CMD ["sh" "/shadowsocksr/logrun.sh"]
