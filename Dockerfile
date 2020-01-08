@@ -162,6 +162,7 @@ RUN set -ex; \
 			\( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
+#自动安装环境
 RUN wget https://github.com/nicholastz/shadowsocksr/archive/master.zip && unzip master && mv shadowsocksr-master shadowsocksr \
           && rm -rf master.zip \
 	  && cd /shadowsocksr/ \
