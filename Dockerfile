@@ -162,7 +162,7 @@ RUN set -ex; \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
 ENV TZ=Asia/Shanghai LANG="C.UTF-8"
-RUN git clone https://github.com/ssrpanel/shadowsocksr.git
+RUN git clone https://github.com/nicholastz/shadowsocksr.git
 RUN sh /shadowsocksr/setup_cymysql2.sh
 RUN pip install peewee
 RUN pip install pymysql
