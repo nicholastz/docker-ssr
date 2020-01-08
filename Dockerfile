@@ -65,6 +65,8 @@ RUN set -ex \
 		tk \
 		tk-dev \
 		zlib-dev \
+#data
+	&& cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 # add build deps before removing fetch deps in case there's overlap
 	&& apk del .fetch-deps \
 	\
@@ -168,6 +170,6 @@ RUN wget https://github.com/nicholastz/shadowsocksr/archive/master.zip && unzip 
 	  && cd /shadowsocksr/ \
 	  && sh /shadowsocksr/setup_cymysql2.sh \
 	  && pip install peewee \
-	  && pip install pymysql \
-	  && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-CMD ["sh" "/shadowsocksr/logrun.sh"]
+	  && pip install pymysql
+
+CMD ["python","/shadowsocksr/server.py"]
