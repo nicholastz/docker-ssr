@@ -161,8 +161,8 @@ RUN set -ex; \
 			\( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
-ENV TZ=Asia/Shanghai LANG="C.UTF-8"
-RUN git clone https://github.com/nicholastz/shadowsocksr.git
+ENV TZ=Asia/Shanghai
+RUN wget https://github.com/nicholastz/shadowsocksr/archive/master.zip && unzip master && mv shadowsocksr-master shadowsocksr
 RUN sh /shadowsocksr/setup_cymysql2.sh
 RUN pip install peewee
 RUN pip install pymysql
