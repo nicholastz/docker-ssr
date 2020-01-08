@@ -168,4 +168,4 @@ RUN cd /shadowsocksr
 RUN sh /shadowsocksr/setup_cymysql2.sh
 RUN pip install peewee
 RUN pip install pymysql
-CMD ["python /shadowsocksr/server.py"]
+CMD ["python" "/shadowsocksr/server.py"]
