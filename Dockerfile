@@ -6,18 +6,12 @@ ADD . /usr/src/app
 ENV TZ Asia/Shanghai
 
 
-## install python requirements 
+RUN wget https://github.com/nicholastz/shadowsocksr/archive/master.zip && unzip master && mv shadowsocksr-master/* /usr/src/app/ \
+    && rm -rf master.zip shadowsocksr-master/ \
+	  && sh setup_cymysql2.sh \
+	  && pip install peewee \
+	  && pip install pymysql \
+    && apk add --no-cache tzdata \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-
-## install ntpdate, not accept but saving code
-#RUN echo 'deb http://mirrors.163.com/debian/ jessie main non-free contrib \
-#	deb http://mirrors.163.com/debian/ jessie-updates main non-free contrib \
-#	deb http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib' > /etc/apt/sources.list \
-#	&& apt-get update\
-#	&& apt-get install ntpdate -y \
-
-
-#EXPOSE 5010
-
-CMD [ "python", "run.py" ]
-#ENTRYPOINT [ "python", "run.py" ]
+CMD [ "python", "server.py" ]
