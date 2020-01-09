@@ -65,7 +65,6 @@ RUN set -ex \
 		tk \
 		tk-dev \
 		zlib-dev \
-#data
 	&& cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 # add build deps before removing fetch deps in case there's overlap
 	&& apk del .fetch-deps \
@@ -164,7 +163,7 @@ RUN set -ex; \
 			\( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
-#自动安装环境
+
 RUN wget https://github.com/nicholastz/shadowsocksr/archive/master.zip && unzip master && mv shadowsocksr-master shadowsocksr \
           && rm -rf master.zip \
 	  && cd /shadowsocksr/ \
